@@ -1,0 +1,232 @@
+﻿@model DetailsVM
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task</title>
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+          rel="stylesheet" />
+    <!-- end -->
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- end -->
+    <!-- css links -->
+    <link rel="stylesheet" href="~/task--main/assets/css/reset.css" />
+    <link rel="stylesheet" href="~/task--main/assets/css/layout.css" />
+    <link rel="stylesheet" href="~/task--main/assets/css/style.css" />
+    <link rel="stylesheet" href="~/task--main/assets/css/responsive.css" />
+    <!-- end -->
+</head>
+
+<body>
+    <main class="container main-elem">
+        <nav class="menu">
+            <h3 class="site-name">
+                Rental
+            </h3>
+            <i class="fa-solid fa-bars toggle"></i>
+        </nav>
+        <div class="d-flex  parent-elem">
+
+            <aside class="col-xl-3 col-lg-3 aside-panel ">
+
+                <div class="left-aside">
+                    <div class="p-15">
+                        <i class="fa-solid fa-x close-btn"></i>
+                        <h3 class="head">Rental from $@Model.Apartment.PricePerNight</h3>
+                        <p>per night</p>
+                        <form class="filter">
+
+                            <label for="checkIn" class="check">
+                                <i class="fa-solid fa-calendar-days"></i> <span>
+                                    Check
+                                    in
+                                </span>
+                            </label>
+                            <input id="checkIn" type="text" class="filter-input" placeholder="DDMMYYYY">
+                            <p class="d-none " id="reqIn">This field is required</p>
+                            <p class="d-none " id="validIn">Format is not valid</p>
+                            <label for="checkOut" class="check">
+                                <i class="fa-solid fa-calendar-days "></i> <span>
+                                    Check
+                                    out
+                                </span>
+                            </label>
+                            <input id="checkOut" type="text" class="filter-input" placeholder="DDMMYYYY">
+                            <p class="d-none " id="reqOut">This field is required</p>
+                            <p class="d-none " id="validOut">Format is not valid</p>
+
+                            <label for="check" class="check"><i class="fa-solid fa-person "></i> <span>Adults</span></label>
+                            <input id="check" type="number" class="filter-input" min="1" value="1">
+                            <label for="check" class="check">
+                                <i class="fa-solid fa-child-reaching"></i>
+                                <span>Kids</span>
+                            </label>
+                            <input id="check" type="number" class="filter-input" min="0" value="0">
+                            <div class="btn-body">
+                                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                                <button class="btn-submit">Search availability</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="foot-aside">
+                        <i class="fa-solid fa-building"></i>
+                        Apartment
+                    </div>
+                    <div class="foot-aside">
+                        <i class="fa-solid fa-wifi"></i>
+                        Subscribe
+                    </div>
+                    <div class="foot-aside">
+                        <i class="fa-solid fa-envelope"></i>
+                        Contact
+
+                    </div>
+
+                </div>
+
+
+
+            </aside>
+            <div class="overlay"></div>
+            <section class="col-xl-9 col-lg-9 col-md-12 section-body">
+                <h2 class="section-head">@Model.Apartment.Name</h2>
+                <div class="slider">
+                    <div class="slider-elem">
+                        <img src="~/images/apartments/@Model.Apartment.ApartmentImages[0].ImageUrl" alt="image" class="slider-image-parent">
+                    </div>
+                    <div class="d-flex gap-10">
+                        @foreach (var item in Model.Apartment.ApartmentImages)
+                        {
+                            <div class="col-lg-3">
+                                <img src="~/images/apartments/@item.ImageUrl" alt="" onClick="changeSlider(this.src)"
+                                     class="slider-image-child active">
+                            </div>
+                        }
+                    </div>
+                </div>
+                <article class="article">
+                    <h3 class="article-heads">The space</h3>
+                    <div class="space-body">
+                        <div class="d-flex gap-10">
+                            <div class="col-lg-6">
+                                <p class="space-txts"><i class="fa-solid fa-person section-icons"></i>Max people: @Model.Apartment.MaxPeople</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="space-txts"><i class="fa-regular fa-clock section-icons"></i>Check In: After @Model.Apartment.CheckInTime.ToString(@"hh\:mm")</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-10">
+                            <div class="col-lg-6">
+                                <p class="space-txts"><i class="fa-solid fa-bath section-icons"></i> Bathrooms: @Model.Apartment.BathRooms</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="space-txts"><i class="fa-regular fa-clock section-icons"></i>Check Out: @Model.Apartment.CheckOutTime.ToString(@"hh\:mm")</p>
+                            </div>
+                        </div>
+                        <p class="space-txts"><i class="fa-solid fa-bed section-icons"></i> Bedrooms: @Model.Apartment.BedRooms</p>
+                    </div>
+                </article>
+                <article class="article">
+                    <h3 class="article-heads">Amenities</h3>
+                    <div class="space-body">
+                        <div class="d-flex gap-10" style="flex-wrap: wrap;">
+                            @foreach (var item in Model.Apartment.ApartmentFeatures)
+                            {
+                                <div class="col-lg-5">
+                                    <p class="space-txts"><i class="fa-solid @item.Feature.Icon section-icons"></i>@item.Feature.Name</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </article>
+                <article class="article">
+                    <h3 class="article-heads">Extra Info </h3>
+                    <div class="space-body">
+                        <p>
+                            @Model.ApartmentInfo.ExtraInfo
+                            
+                        </p>
+                        <div class="d-flex gap-5">
+                            <p>We accept:</p>
+                            <i class="fa-brands fa-cc-mastercard"></i>
+                            <i class="fa-brands fa-cc-visa"></i>
+                            <i class="fa-regular fa-credit-card"></i>
+                            <i class="fa-solid fa-credit-card"></i>
+                        </div>
+                    </div>
+                </article>
+                <article class="article">
+                    <h3 class="article-heads">
+                        Rules
+                    </h3>
+                    <div class="space-body">
+                        <p>
+                        @Model.ApartmentInfo.Rules
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                            ea commodo consequat.
+                        </p>
+                        <p>
+                            Subscribe to receive updates on available dates and special offers.
+                        </p>
+                        <div class="col-lg-3">
+                            <button class="btn-submit">Subscribe</button>
+                        </div>
+                    </div>
+
+                </article>
+                <article class="contact">
+                    <h2>Contact</h2>
+                    <div class="d-flex gap-20">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>@Model.ApartmentInfo.City</p>
+                    </div>
+                    <div class="d-flex gap-20">
+                        <i class="fa-solid fa-phone"></i>
+                        <p> Phone: @Model.ApartmentInfo.Phone</p>
+                    </div>
+                    <div class="d-flex gap-20">
+                        <i class="fa-solid fa-envelope"></i>
+                        <p>Email: @Model.ApartmentInfo.Email</p>
+                    </div>
+                    <form asp-controller="Home" asp-action="SendEmail" method="post" class="email-form">
+                        <p>Questions? Go ahead, ask them:</p>
+                        <input type="text" class="email-inputs" id="nameInput" placeholder="Name" name="Name">
+                        <p class="d-none " id="nameRegister">This field is required</p>
+                        <input type="email" class="email-inputs" id="emailInput" placeholder="Email" name="Email">
+                        <p class="d-none " id="emailRegister">This field is required</p>
+                        <p class="d-none " id="emailValid">Email is not Valid </p>
+                        <input type="text" class="email-inputs" id="messageInput" placeholder="Message" name="Message">
+                        <p class="d-none " id="messageRegister">This field is required</p>
+                        <div class="col-lg-3">
+                            <button type="submit" class="btn-submit">Send a Message</button>
+                        </div>
+                    </form>
+                </article>
+                <div class="foot">
+                    <a href="https://github.com/AyxanAmirov" target="_blank">
+                        Povered by <span style="color: red;">Front: Aykhan | Back: Ilkin</span>
+                    </a>
+                </div>
+            </section>
+
+
+        </div>
+
+    </main>
+    @*   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script> *@
+    <script src="~/task--main/assets/js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+@media screen and (max-width:993px) {
+    .aside-panel {
+        display: none;
+        z-index: 999;
+        top: 0;
+        bottom: 0;
+        height: 100vh;
+    }
+.close-btn{
+    display: block;
+}
+    .menu {
+        display: flex;
+        position: relative;
+        z-index: 3;
+    }
+}

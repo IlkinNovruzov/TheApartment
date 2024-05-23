@@ -1,0 +1,64 @@
+﻿@model ApartmentInfo
+<div class="d-flex justify-content-around">
+    <form asp-controller="Home" asp-action="Edit" method="post" enctype="multipart/form-data" class="col-lg-8 needs-validation" novalidate>
+        <div class="card">
+            <div class="card-header"><strong>Apartment Info</strong><small> Form</small></div>
+            <div class="card-body card-block">
+                <input type="hidden" asp-for="Id"/>
+                <div class="form-group">
+                    <label asp-for="ExtraInfo" class="form-control-label">ExtraInfo</label>
+                    <input asp-for="ExtraInfo" type="text" placeholder="ExtraInfo" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Rules" class="form-control-label">Rules</label>
+                    <input asp-for="Rules" type="text" placeholder="Rules" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="form-control-label">Email</label>
+                    <input type="email" asp-for="Email" placeholder="Email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="form-control-label">Phone</label>
+                    <input type="text" asp-for="Phone" placeholder="Phone" class="form-control" required>
+                </div> 
+                <div class="form-group">
+                    <label asp-for="City" class="form-control-label">City</label>
+                    <input type="text" asp-for="City" placeholder="City" class="form-control" required>
+                </div>
+               
+                <button type="submit" class="btn btn-lg btn-info btn-block">
+                    <span id="payment-button-amount">Save</span>
+                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
+@section scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

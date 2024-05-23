@@ -1,0 +1,89 @@
+﻿@model ApartmentVM
+<div class="d-flex justify-content-around">
+    <form asp-controller="Apartment" asp-action="Add" method="post" enctype="multipart/form-data" class="col-lg-8 needs-validation" novalidate>
+        <div class="card">
+            <div class="card-header"><strong>Apartment</strong><small> Form</small></div>
+            <div class="card-body card-block">
+                <div class="form-group">
+                    <label asp-for="Apartment.Name" class="form-control-label">Name</label>
+                    <input asp-for="Apartment.Name" type="text" placeholder="Name" class="form-control" required>
+                </div> 
+                <div class="form-group">
+                    <label asp-for="Apartment.PricePerNight" class="form-control-label">PricePerNight</label>
+                    <input asp-for="Apartment.PricePerNight" type="text" placeholder="PricePerNight" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Apartment.BedRooms" class="form-control-label">BedRooms</label>
+                    <input type="number" asp-for="Apartment.BedRooms" value="1" min="1" placeholder="BedRooms" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Apartment.BathRooms" class="form-control-label">BathRooms</label>
+                    <input type="number" asp-for="Apartment.BathRooms" value="1" min="1" placeholder="BathRooms" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Apartment.MaxPeople" class="form-control-label">MaxPeople</label>
+                    <input type="number" asp-for="Apartment.MaxPeople" value="1" min="1" placeholder="MaxPeople" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Apartment.CheckInTime" class="form-control-label">CheckInTime</label>
+                    <input type="time" asp-for="Apartment.CheckInTime" placeholder="CheckInTime" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Apartment.CheckOutTime" class="form-control-label">CheckOutTime</label>
+                    <input type="time" asp-for="Apartment.CheckOutTime" placeholder="CheckOutTime" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FeatureIds" class="form-control-label">Select Features</label>
+                    <select asp-for="FeatureIds" id="features" class="form-control" multiple required>
+                        @foreach (var item in ViewBag.Features)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+               
+                
+                <label class="form-check-label" asp-for="Apartment.IsActive">Activation</label>
+                <div class="form-check form-switch fs-4">
+                    <input class="form-check-input" type="checkbox" asp-for="Apartment.IsActive" checked>
+                </div><br />
+                <button type="submit" class="btn btn-lg btn-info btn-block">
+                    <span id="payment-button-amount">Add</span>
+                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
+@section scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
+    <script>
+        new MultiSelectTag('features')  // id
+    </script>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}
