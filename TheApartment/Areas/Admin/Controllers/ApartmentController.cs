@@ -47,6 +47,7 @@ namespace TheApartment.Areas.Admin.Controllers
 
             return RedirectToAction("ApartmentImages", new { id = model.Apartment.Id });
         }
+
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
